@@ -6,15 +6,21 @@
   "author": "iksflow <theiksflow@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@hapi/hapi": "^21.3.2"
+    "@hapi/hapi": "^21.3.2",
+    "@hapi/vision": "^7.0.2",
+    "ejs": "^3.1.9",
+    "joi": "^17.9.2"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
+    "@types/ejs": "^3.1.2",
     "@types/hapi": "^18.0.8",
+    "@types/hapi__vision": "^5.5.4",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.4.1",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
+    "node-html-parser": "^6.1.5",
     "nodemon": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "ts-node": "^10.9.1",
