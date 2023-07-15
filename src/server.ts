@@ -2,6 +2,9 @@
 
 import Hapi from "@hapi/hapi";
 import { Request, Server } from "@hapi/hapi";
+import hapiVision from "@hapi/vision";
+import { helloRoutes } from "./hello";
+import { peopleRoutes } from "./people";
 
 export let server: Server;
 
@@ -11,11 +14,16 @@ export const init = async function (): Promise<Server> {
     host: "0.0.0.0",
   });
 
+  // 이 코드를 실행하지 않으면 ResponseToolKit에서 view 메서드를 사용할 수 없다. (h.view 가 undefined로 나옴)
+  await registerVision(server);
+
   server.route({
     method: "GET",
     path: "/",
     handler: index,
   });
+  server.route(helloRoutes);
+  server.route(peopleRoutes);
 
   return server;
 };
@@ -35,3 +43,25 @@ process.on("unhandledRejection", (err) => {
   console.error(err);
   process.exit(1);
 });
+
+async function registerVision(server: Server) {
+  let cached: boolean;
+
+  await server.register(hapiVision);
+
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+    cached = false;
+  } else {
+    cached = true;
+  }
+
+  server.log(["debug"], `Caching templates: ${cached}`);
+  server.views({
+    engines: {
+      ejs: require("ejs"),
+    },
+    relativeTo: __dirname + "/../",
+    path: "templates",
+    isCached: cached,
+  });
+}
