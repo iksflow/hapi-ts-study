@@ -34,3 +34,22 @@ $ yarn add -D ts-node
 }
 
 ```
+
+## 4. Hapi Vision 설치
+
+```sh
+$ yarn add @hapi/vision ejs
+$ yarn add -D @types/hapi__vision @types/ejs
+```
+
+테스트 도구
+
+```sh
+$ yarn add -D node-html-parser
+```
+
+## 5. Joi 설치
+
+```sh
+$ yarn add joi
+```
